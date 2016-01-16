@@ -15,11 +15,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	
+	RoboLib robot;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	robot = new RoboLib(0);
+    	robot.setupDriveTrain(0, 1, 2, 3);
+    	robot.mapPistonToButton(7, 0, 1);
     }
     
 	/**
@@ -44,7 +48,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        
+        robot.main();
     }
     
     /**

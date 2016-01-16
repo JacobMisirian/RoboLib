@@ -20,11 +20,11 @@ public class RoboLib {
 		this.joystick = joystick;
 	}
 	
-	public void SetupDriveTrain (int frontLeft, int rearLeft, int frontRight, int rearRight) {
+	public void setupDriveTrain (int frontLeft, int rearLeft, int frontRight, int rearRight) {
 		driveTrain = new DoubleTankDrive(frontLeft, rearLeft, frontRight, rearRight);
 	}
 	
-	public void MapPistonToButton (int button, int solenoidOn, int solenoidOff) {
+	public void mapPistonToButton (int button, int solenoidOn, int solenoidOff) {
 		Solenoid[] sols = new Solenoid[2];
 		sols[0] = new Solenoid(solenoidOn);
 		sols[1] = new Solenoid(solenoidOff);
@@ -32,7 +32,7 @@ public class RoboLib {
 		solenoids.put(button, sols);
 	}
 	
-	public void SwapPiston (Solenoid solenoidOn, Solenoid solenoidOff) {
+	public void swapPiston (Solenoid solenoidOn, Solenoid solenoidOff) {
 		if (solenoidOn.get() && !solenoidOff.get()) {
 			solenoidOn.set(false);
 			solenoidOff.set(true);
@@ -42,10 +42,10 @@ public class RoboLib {
 		}
 	}
 	
-	public void Main () {
+	public void main () {
 		driveTrain.Drive(joystick);
 		for (Entry<Integer, Solenoid[]> entry : solenoids.entrySet())
 			if (joystick.getRawButton(entry.getKey()))
-				SwapPiston(entry.getValue()[0], entry.getValue()[1]);
+				swapPiston(entry.getValue()[0], entry.getValue()[1]);
 	}
 }
